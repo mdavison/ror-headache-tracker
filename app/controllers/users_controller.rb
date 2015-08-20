@@ -1,4 +1,11 @@
 class UsersController < ApplicationController
+  before_action :signed_in_user, only: [:index ,:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:show, :edit, :update]
+  before_action :admin_user, only: [:index, :destroy]
+
+  def index
+    @users = User.all
+  end
 
   def show 
     @user = User.find(params[:id])
@@ -23,10 +30,48 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy 
+    user = User.find(params[:id]).destroy
+    flash[:success] = "User #{user.email} was deleted."
+    #flash[:success] = CGI::unescapeHTML("User <strong>#{user.email}</strong> was deleted.")
+    redirect_to users_url
+  end
+
   private
 
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation)
     end
 
+    # Before filters
+
+    # Confirms a signed_in user
+    def signed_in_user
+      unless signed_in?
+        store_location # URL that user intended to go before signing in
+        flash[:danger] = "Please sign in"
+        redirect_to signin_url
+      end
+    end
+
+    # Confirms the correct user
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
+    end
+
+    # Confimrs an admin user
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
 end
