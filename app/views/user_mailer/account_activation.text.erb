@@ -1,0 +1,6 @@
+Hi!
+
+Welcome to the Headache Tracker app! Click on or (copy and paste into your 
+browser) the link below to activate your account:
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
