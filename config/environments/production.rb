@@ -67,7 +67,7 @@ Rails.application.configure do
   host = 'https://radiant-scrubland-5691.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings = {
-    :address              => 'smtp.mandrillapp.com'
+    :address              => 'smtp.mandrillapp.com',
     :port                 => '587',
     :authentication       => :plain,
     :user_name            => ENV['MANDRILL_USERNAME'],
