@@ -22,3 +22,9 @@ User.create!(email: "example@example.com",
                activated: true,
                activated_at: Time.zone.now)
 end
+
+users = User.order(:created_at).take(6)
+50.times do 
+  headache_date = Faker::Time.backward(30)
+  users.each { |user| user.headaches.create!(headache_date: headache_date) }
+end

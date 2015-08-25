@@ -1,0 +1,54 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  headache_date: 2015-08-20
+  # created most recently but should show up as oldest
+  created_at: <%= 4.minutes.ago %> 
+  user: michael
+
+two:
+  headache_date: 2015-08-21
+  created_at: <%= 3.days.ago %>
+  user: michael
+
+three:
+  headache_date: 2015-08-22
+  created_at: <%= 2.days.ago %>
+  user: michael
+
+four:
+  headache_date: 2015-08-23
+  created_at: <%= 1.day.ago %>  
+  user: michael
+
+most_recent:
+  headache_date: <%= Time.zone.today %>
+  created_at: <%= 10.minutes.ago %>  
+  user: michael
+
+<% 30.times do |n| %>
+headache_<%= n %>:
+  headache_date: <%= Faker::Time.backward(30) %>
+  created_at: <%= 42.days.ago %>
+  user: michael
+<% end %>
+
+another_one:
+  headache_date: 2015-08-21
+  created_at: <%= 3.days.ago %>
+  user: tom
+
+another_two:
+  headache_date: 2015-08-22
+  created_at: <%= 2.days.ago %>
+  user: lynda
+
+another_three:
+  headache_date: 2015-08-23
+  created_at: <%= 1.day.ago %>  
+  user: lynda
+
+another_four:
+  headache_date: 2015-08-20
+  created_at: <%= 12.minutes.ago %>  
+  user: tom

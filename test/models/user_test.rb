@@ -68,4 +68,12 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.authenticated?(:remember, '')
   end
 
+  test "associated headaches should be destroyed" do 
+    @user.save 
+    @user.headaches.create!(headache_date: Time.zone.today)
+    assert_difference 'Headache.count', -1 do 
+      @user.destroy
+    end
+  end
+
 end

@@ -1,0 +1,7 @@
+<%= form_for(@headache) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="form-group">
+    <%= f.date_field :headache_date, placeholder: Time.zone.today %>
+  </div>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>

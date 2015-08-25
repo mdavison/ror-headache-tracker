@@ -1,1 +1,15 @@
-<%= @user.email %>
+<div class="row">
+  <aside class="col-md-4">
+    <h3><%= @user.email %></h3>
+  </aside>
+
+  <div class="col-md-8">
+    <% if @user.headaches.any? %>
+      <h3>Headaches (<%= @user.headaches.count %>)</h3>
+      <ul class="list-group">
+        <%= render @headaches %>
+      </ul>
+      <%= will_paginate @headaches %>
+    <% end %>
+  </div>
+</div>
