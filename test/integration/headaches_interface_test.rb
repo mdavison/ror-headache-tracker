@@ -1,5 +1,4 @@
 require 'test_helper'
-include ActionView::Helpers::DateHelper
 
 class HeadachesInterfaceTest < ActionDispatch::IntegrationTest
 
@@ -23,7 +22,7 @@ class HeadachesInterfaceTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to root_url
     follow_redirect!
-    assert_match time_ago_in_words(headache_date), response.body
+    assert_match headache_date.strftime("%B %d, %Y"), response.body
     # Delete a headache
     assert_select 'a', text: 'delete'
     first_headache = @user.headaches.paginate(page: 1).first 

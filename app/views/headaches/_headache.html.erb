@@ -1,8 +1,9 @@
 <li class="list-group-item">
   <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
-  <%= time_ago_in_words(headache.headache_date) %> ago.
+  <%= headache.headache_date.strftime("%B %d, %Y") %>
   <% if current_user?(headache.user) %>
     <%= link_to "delete", headache, method: :delete, 
+                                    class: "pull-right",
                                     data: { confirm: "Are you sure?" } %>
   <% end %>
 </li>
